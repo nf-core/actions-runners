@@ -12,9 +12,12 @@ sudo usermod -aG docker ubuntu
 curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
-#Install latest npm version
+
+#Setup actions to be able to write to certain directories when installing libraries
 sudo chmod -R 777 /usr/local/lib
-sudo chmod -R 777 /usr/local/bin/
+sudo chmod -R 777 /usr/local/bin/prettier
+sudo chmod -R 777 /usr/lib
+
 #install conda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh
 #install singularity
