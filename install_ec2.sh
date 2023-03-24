@@ -32,3 +32,7 @@ sudo apt-get update && sudo apt-get install -y \
     openjdk-18-jre-headless
 wget https://github.com/sylabs/singularity/releases/download/v3.11.1/singularity-ce_3.11.1-jammy_amd64.deb
 sudo dpkg -i singularity-ce_3.11.1-jammy_amd64.deb
+#PHP Composer for website stuff
+sudo apt install php-cli unzip 
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
