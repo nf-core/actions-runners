@@ -41,5 +41,5 @@ Steps:
     sudo ./svc.sh install
     sudo ./svc.sh start
     ```
-
-5. Check if the runner is up and running and taking up jobs on the [nf-core runners settings page](https://github.com/organizations/nf-core/settings/actions/runners).
+5. Also add a script (see `cleanup_runner.sh` to the home directory) and add it according to this https://docs.github.com/de/actions/hosting-your-own-runners/running-scripts-before-or-after-a-job to enable automated cleanup of runner temp files.
+6. Check if the runner is up and running and taking up jobs on the [nf-core runners settings page](https://github.com/organizations/nf-core/settings/actions/runners).
