@@ -21,7 +21,7 @@ Runners are created at the organisation level and share the same tags as the def
 ## Creating the EC2 instance
 
 > **Note**
-> This is only required for setting up things from start - there is also an AMI set up with the ID `ami-0ebb509bbc63ac7a6 ` (accessible for core members) to just boot up an arbitrary EC2 instance that already connects to the self-hosted backend of GitHub for nf-core repositories.
+> This is only required for setting up things from start - there is also an AMI set up with the ID `ami-0f9b3c9453ce9ea89` (accessible for core members) to just boot up an arbitrary EC2 instance that already connects to the self-hosted backend of GitHub for nf-core repositories.
 
 Steps:
 
