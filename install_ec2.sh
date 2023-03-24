@@ -17,7 +17,9 @@ sudo apt-get install -y npm
 sudo chmod -R 777 /usr/local/lib
 sudo chmod -R 777 /usr/local/bin/prettier
 sudo chmod -R 777 /usr/lib
-sudo chmod -R 777 /usr/lib/node_modules/
+
+#Force npm to install to .local
+npm config set prefix '~/.local/'
 
 #install conda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh
