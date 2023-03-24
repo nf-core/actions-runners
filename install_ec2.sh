@@ -20,7 +20,8 @@ sudo chmod -R 777 /usr/lib
 
 #Force npm to install to .local
 npm config set prefix '~/.local/'
-
+#Add it to path
+export PATH=$PATH:/home/ubuntu/.local/bin
 #install conda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh
 #install singularity
