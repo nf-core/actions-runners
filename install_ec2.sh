@@ -8,8 +8,11 @@ sudo apt-get install docker-ce
 sudo systemctl start docker
 sudo groupadd docker
 sudo usermod -aG docker ubuntu
-sudo apt install nodejs
-sudo apt install npm
+#Install Node > 19.0, to make editorconfig work
+curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs
+sudo apt-get install -y npm
+#Install latest npm version
 sudo chmod -R 777 /usr/local/lib
 sudo chmod -R 777 /usr/local/bin/
 #install conda
@@ -25,6 +28,7 @@ sudo apt-get update && sudo apt-get install -y \
     pkg-config \
     git \
     cryptsetup-bin \
-    uidmap
+    uidmap \
+    openjdk-18-jre-headless
 wget https://github.com/sylabs/singularity/releases/download/v3.11.1/singularity-ce_3.11.1-jammy_amd64.deb
 sudo dpkg -i singularity-ce_3.11.1-jammy_amd64.deb
