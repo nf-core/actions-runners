@@ -40,6 +40,8 @@ sudo apt install php-cli unzip
 curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
+#Run this part of the script after adding a new user "runner" who should be made part of usergroup(s) docker and sudo to be able to run the services!
+
 #Add "runner" user, change to it and add it to the required groups, work needs to be in the same directory as on regular GHA runners
 sudo useradd runnner
 sudo usermod -a -G docker runner
@@ -51,4 +53,4 @@ npm config set prefix '~/.local/'
 #Add it to path
 export PATH=$PATH:/home/runner/.local/bin
 
-#Continue with the regular setup under user runner and make sure work is in the home of runner
+#Continue with the regular setup under user runner and make sure work is in the home of runner as written in the readme file
