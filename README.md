@@ -27,14 +27,14 @@ Steps:
 
 1. Use `ubuntu` latest for EC2 instance, boot up machine with sufficient local storage (64GB is enough). We use a `m4.large`(4CPUS, 16GB memory, with additional storage bump to 64GB SSD storage).
 
-2. Start machine, log in as standard user (e.g. `ubuntu`), clone this repository to your home and use it from there: `git clone https://github.com/nf-core/actions-runners`
+2. Start machine, log in as standard user (e.g. `ubuntu`).
 
-3. Install required software and set up groups using the [`install_ec2.sh` script](install_ec.sh).
+3. Install required software and set up groups using the [`install_ec2.sh` script](install_ec.sh). Create another user `runner` as GHA requires this to have the same setup between self hosted and GHA hosted action runners. Clone this repository to the home of `runner` and use it from there: `git clone https://github.com/nf-core/actions-runners`
 
 4. Go to the [nf-core runners settings page](https://github.com/organizations/nf-core/settings/actions/runners) (only accessible to core team members). Select instructions on how to set up runners by copying the code line by line and executing it :wink:
 
     > **Warning**
-    > Make sure that you run the `./configure ...` step in a way that you add the label `ubuntu-latest` so that any nf-core pipeline repository can run their jobs on the created runner.  Otherwise your runner will not take any jobs from repositories in nf-core, thus being not particularly useful! :wink: You will be asked whether you want to add labels interactively, so this is easy!
+    > Make sure that you run the `./configure ...` step in a way that you add the label `ubuntu-latest` so that any nf-core pipeline repository can run their jobs on the created runner.  Otherwise your runner will not take any jobs from repositories in nf-core, thus being not particularly useful! :wink: You will be asked whether you want to add labels interactively, so this is easy! Also make sure that `work` is in your home path, should be: `/home/runner/work`
 5. Add the cleanup script to your setup env (see `cleanup_runner.sh` to the home directory) according to this https://docs.github.com/de/actions/hosting-your-own-runners/running-scripts-before-or-after-a-job to enable automated cleanup of runner temp files. Can be done using the script `setup_cleanup.sh` in this repository too. Restart the
 6. Manually set up service to autostart when machine boots as documented [here](https://docs.github.com/en/actions/hosting-your-own-runners/configuring-the-self-hosted-runner-application-as-a-service)
     ```bash
