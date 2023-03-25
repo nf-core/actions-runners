@@ -18,10 +18,6 @@ sudo chmod -R 777 /usr/local/lib
 sudo chmod -R 777 /usr/local/bin/prettier
 sudo chmod -R 777 /usr/lib
 
-#Force npm to install to .local
-npm config set prefix '~/.local/'
-#Add it to path
-export PATH=$PATH:/home/ubuntu/.local/bin
 #install conda
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && bash Miniconda3-latest-Linux-x86_64.sh
 #install singularity
@@ -43,3 +39,16 @@ sudo dpkg -i singularity-ce_3.11.1-jammy_amd64.deb
 sudo apt install php-cli unzip 
 curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
 sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+#Add "runner" user, change to it and add it to the required groups, work needs to be in the same directory as on regular GHA runners
+sudo useradd runnner
+sudo usermod -a -G docker runner
+
+#Change to runner user
+sudo su runner
+#Force npm to install to .local
+npm config set prefix '~/.local/'
+#Add it to path
+export PATH=$PATH:/home/runner/.local/bin
+
+#Continue with the regular setup under user runner and make sure work is in the home of runner
