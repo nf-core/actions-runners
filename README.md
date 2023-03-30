@@ -42,3 +42,15 @@ Steps:
     sudo ./svc.sh start
     ```
 7. Check if the runner is up and running and taking up jobs on the [nf-core runners settings page](https://github.com/organizations/nf-core/settings/actions/runners).
+
+
+### To access a runnin instance
+
+Once in the EC2 running instances in the AWS nf-core account:
+
+1. Click on the custom runner
+2. Click on "connect" on the top right menu bar
+3. Change the user name to the required one (ubuntu or runner)
+4. Connect
+
+A terminal will open in a new browser tab.
