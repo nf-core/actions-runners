@@ -1,6 +1,6 @@
 locals {
   environment = var.environment != null ? var.environment : "multi-runner"
-  aws_region  = "eu-central-1"
+  aws_region  = "eu-west-1"
 
   # Load runner configurations from Yaml files
   multi_runner_config = { for c in fileset("${path.module}/runner-configs", "*.yaml") : trimsuffix(c, ".yaml") => yamldecode(file("${path.module}/runner-configs/${c}")) }
@@ -21,7 +21,7 @@ module "runners" {
   runners_scale_down_lambda_timeout = 60
   prefix                            = local.environment
   tags = {
-    Project = "ProjectX"
+    Project = "nf-core"
   }
   github_app = {
     key_base64     = var.github_app.key_base64
