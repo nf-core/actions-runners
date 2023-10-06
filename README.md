@@ -1,4 +1,3 @@
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="images/nfcore-actionsrunners_logo_dark.png">
   <img alt="nf-core actions-runner logo." src="images/nfcore-actionsrunners_logo.png">
@@ -20,6 +19,7 @@ Runners are created at the organisation level and share the same tags as the def
 
 - Terraform
 - AWS account with permissions to create EC2 instances and IAM roles
+
 # Instructions
 
 1. Setup a org level GitHub app as described in [Philips-labs/terraform-aws-github-runner](https://github.com/philips-labs/terraform-aws-github-runner/tree/main?tab=readme-ov-file#setup-github-app-part-1).
@@ -37,6 +37,15 @@ github_app = {
 > [!NOTE]
 > On MacOS you can create the base64 converted key with `cat YOUR_PEM_KEY_FILE | base64 -w0 `
 
-3. Run `terraform init` to initialize the terraform modules.
+3. Download lambda function dependencies with
 
-4. Run `terraform apply` to set everything up.
+```bash
+cd lambdas-download
+terraform init
+terraform apply
+cd ..
+```
+
+4. Run `terraform init` to initialize the terraform modules.
+
+5. Run `terraform apply` to set everything up.
