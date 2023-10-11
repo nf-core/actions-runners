@@ -21,7 +21,7 @@ module "runners" {
   runners_scale_down_lambda_timeout = 60
   prefix                            = local.environment
   tags = {
-    Project = "nf-core"
+    Project = "nf-core-actions-runner"
   }
   github_app = {
     key_base64     = var.github_app.key_base64

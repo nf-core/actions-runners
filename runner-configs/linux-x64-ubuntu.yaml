@@ -2,7 +2,7 @@
 matcherConfig:
   exactMatch: true
   labelMatchers:
-    - [self-hosted, linux, x64, ubuntu-latest]
+    # - [self-hosted, linux, x64, ubuntu-latest]
     - [self-hosted, linux, x64, ubuntu-2204]
 fifo: true
 delay_webhook_event: 0

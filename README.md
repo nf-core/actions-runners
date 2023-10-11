@@ -37,7 +37,7 @@ github_app = {
 > [!NOTE]
 > On MacOS you can create the base64 converted key with `cat YOUR_PEM_KEY_FILE | base64 -w0 `
 
-3. Download lambda function dependencies with
+3. Download lambda function dependencies with:
 
 ```bash
 cd lambdas-download
