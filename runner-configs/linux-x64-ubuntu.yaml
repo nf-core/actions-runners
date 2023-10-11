@@ -32,10 +32,11 @@ runner_config:
       - ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
     state:
       - available
-  idle_config:
-    - cron: "* * 9-17 * * 1-5"
-      timeZone: "Europe/Amsterdam"
-      idleCount: 3
+  # idle_config: # keep `idleCount` runners alive weekdays from 9am to 5pm
+  #   - cron: "* * 9-17 * * 1-5"
+  #     timeZone: "Europe/Amsterdam"
+  #     idleCount: 3
+  minimum_running_time_in_minutes: 30
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
