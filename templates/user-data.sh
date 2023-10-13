@@ -25,7 +25,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
     jq \
     uidmap \
     unzip \
-    wget
+    wget \
+    openjdk-17-jdk
 
 user_name=ubuntu
 user_id=$(id -ru $user_name)
