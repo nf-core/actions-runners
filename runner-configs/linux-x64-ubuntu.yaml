@@ -20,7 +20,7 @@ runner_config:
     - t3a.large
     - m5ad.large
     - m5a.large
-  runners_maximum_count: 25
+  runners_maximum_count: 100
   enable_ephemeral_runners: false
   enable_organization_runners: true
   scale_down_schedule_expression: cron(* * * * ? *)
