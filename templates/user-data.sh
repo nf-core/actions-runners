@@ -26,7 +26,12 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
     uidmap \
     unzip \
     wget \
-    openjdk-17-jdk
+    openjdk-17-jdk \
+    python3.10 \
+    python3.10-venv
+
+# alias python3 with python
+alias python=python3
 
 user_name=ubuntu
 user_id=$(id -ru $user_name)
@@ -78,9 +83,8 @@ cd /opt/actions-runner/
 echo DOCKER_HOST=unix:///run/user/$user_id/docker.sock >>.env
 echo PATH=/home/$user_name/bin:$PATH >>.env
 
-# # add extra nextflow config for to make docker run on AWS
-# echo "docker.userEmulation = false" > nextflow.config
-# echo "docker.fixOwnership = true" >> nextflow.config
+# add extra nextflow config for to make docker run on AWS
+mkdir -p /opt/actions-runner/_work/tools/tools
 
 ${post_install}
 
