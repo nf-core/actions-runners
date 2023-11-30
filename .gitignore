@@ -5,3 +5,4 @@ aws-github-runner-for-nfcore.2023-09-26.private-key.pem
 terraform.tfvars
 *.tfstate
 *.tfstate.*
+.tfvars
