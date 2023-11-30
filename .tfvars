@@ -1,5 +1,0 @@
-github_app_key_base64    = "SHA256:Rn309HhKNS3jRxcjGPFrruhJVy7047p5ZQKKEGBZqcI="
-github_app_id            = "396118"
-github_app_client_id     = " Iv1.2c6bd1a22c7156c0"
-github_app_client_secret = "1be1ddf0276d5d4b608fa21aafb956ae2de8c4ee"
-github_organization      = "nf-core"
