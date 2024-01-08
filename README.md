@@ -60,3 +60,14 @@ cd ..
   - Terminate all instances named `multi-runner*` on AWS
   - Remove all runners in the list of runners in the github settings.
   - deactivate the webhook in the Github settings for the app.
+
+- `touch: .command.trace: Permission denied` error:
+    When running tests with Docker in self-hosted runners the user needs to be fixed. Add the following to the docker profile:
+    ```
+    docker.fixOwnership = true
+    ```
+  - nf-core/tools test:
+    - Check the config file in the `nf-test-tests` branch from GitLab: `modules-test/tests/config/nf-test.config`
+  - nf-core/modules tests:
+    - `tests/config/nextflow.config`
+    - `modules/tests/config/nf-test.config`
