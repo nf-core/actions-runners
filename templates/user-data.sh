@@ -84,6 +84,10 @@ echo DOCKER_HOST=unix:///run/user/$user_id/docker.sock >>.env
 echo PATH=/home/$user_name/bin:$PATH >>.env
 
 # add extra nextflow config for to make docker run on AWS
+echo "docker.userEmulation = true" > nextflow.config
+# echo "docker.fixOwnership = true" >> nextflow.config
+echo "docker.runOptions = '--platform=linux/amd64'" >> nextflow.config
+
 mkdir -p /opt/actions-runner/_work/tools/tools
 
 ${post_install}
