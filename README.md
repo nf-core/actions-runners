@@ -53,8 +53,8 @@ cd ..
 # Troubleshooting
 
 - Runners are not starting:
- - Check that the `runs-on:` value in the github action matches one of the values in `labelMatchers` in the `linux-x64-ubuntu.yaml`
- - Check in the settings of the Github App that they are installed and have the permission to run in the corresponding repository (click on the gear icon next to the installed app)
+- Check that the `runs-on:` value in the github action matches one of the values in `labelMatchers` in the `linux-x64-ubuntu.yaml`
+- Check in the settings of the Github App that they are installed and have the permission to run in the corresponding repository (click on the gear icon next to the installed app)
 
 - Stop using the self-hosted runners
   - Terminate all instances named `multi-runner*` on AWS
