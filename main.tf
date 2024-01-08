@@ -39,7 +39,7 @@ module "runners" {
 
 module "webhook-github-app" {
   source  = "philips-labs/github-runner/aws//modules/webhook-github-app"
-  version = "4.4.1"
+  version = "5.4.2"
   depends_on = [ module.runners ]
 
   github_app = {
