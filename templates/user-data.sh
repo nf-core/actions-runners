@@ -67,8 +67,9 @@ systemctl daemon-reload
 systemctl enable user@UID.service
 systemctl start user@UID.service
 
-curl -fsSL https://get.docker.com/rootless >>/opt/rootless.sh && chmod 755 /opt/rootless.sh
-su -l $user_name -c /opt/rootless.sh
+curl -fsSL https://get.docker.com -o /opt/rootless.sh && chmod 755 /opt/rootless.sh
+su -l $user_name -c /opt/rootless.sh --version 24.0.7
+dockerd-rootless-setuptool.sh install
 echo export DOCKER_HOST=unix:///run/user/$user_id/docker.sock >>/home/$user_name/.bashrc
 echo export PATH=/home/$user_name/bin:$PATH >>/home/$user_name/.bashrc
 
