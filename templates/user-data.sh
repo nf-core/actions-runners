@@ -72,6 +72,18 @@ su -l $user_name -c /opt/rootless.sh
 echo export DOCKER_HOST=unix:///run/user/$user_id/docker.sock >>/home/$user_name/.bashrc
 echo export PATH=/home/$user_name/bin:$PATH >>/home/$user_name/.bashrc
 
+# Change storage driver to fuse-overlayfs
+apt-get install -y fuse-overlayfs
+mkdir -p "/home/$user_name/.config/docker"
+cat > "/home/$user_name/.config/docker/daemon.json" <<-EOF
+
+{
+  "storage-driver": "fuse-overlayfs"
+}
+
+EOF
+chown -R "$user_name" "/home/$user_name/.config/docker"
+
 # Run docker service by default
 loginctl enable-linger $user_name
 su -l $user_name -c "systemctl --user enable docker"
