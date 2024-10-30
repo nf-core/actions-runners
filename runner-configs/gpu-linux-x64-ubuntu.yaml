@@ -17,7 +17,7 @@ runner_config:
   enable_ssm_on_runners: true
   credit_specification: standard
   instance_types:
-    - p2.xlarge
+    - g5.2xlarge
   runners_maximum_count: 10
   enable_ephemeral_runners: false
   enable_organization_runners: true
