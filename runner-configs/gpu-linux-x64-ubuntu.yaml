@@ -2,7 +2,7 @@
 matcherConfig:
   exactMatch: true
   labelMatchers:
-    - [self-hosted-gpu]
+    - [gpu]
 fifo: true
 delay_webhook_event: 0
 redrive_build_queue:
@@ -11,35 +11,38 @@ redrive_build_queue:
 runner_config: 
   runner_os: linux
   runner_architecture: x64
-  runner_extra_labels: nf-core,ubuntu-2204, gpu
+  runner_extra_labels: gpu
   runner_run_as: ubuntu
   runner_name_prefix: ubuntu-2204-x64-gpu_
   enable_ssm_on_runners: true
+  enable_runner_detailed_monitoring: true
   credit_specification: standard
   instance_types:
     - g5.2xlarge
+    - g4dn.2xlarge
   runners_maximum_count: 10
-  enable_ephemeral_runners: false
+  enable_ephemeral_runners: true
   enable_organization_runners: true
   scale_down_schedule_expression: cron(* * * * ? *)
-  userdata_template: ./templates/user-data.sh
+  aws_region: eu-west-1
+  userdata_template: ./templates/user-data-gpu.sh
   ami_owners:
-    - "099720109477" # Canonical's Amazon account ID
+  #   - "099720109477" # Canonical's Amazon account ID
   ami_filter:
     name:
-      - ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
+      - "Deep Learning Base OSS Nvidia Driver GPU AMI (Ubuntu 22.04)*"
     state:
       - available
   # idle_config: # keep `idleCount` runners alive weekdays from 9am to 5pm
     # - cron: "* * 9-17 * * 1-5"
     #   timeZone: "Europe/Amsterdam"
     #   idleCount: 3
-  # minimum_running_time_in_minutes: 30
+  minimum_running_time_in_minutes: 20
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
       volume_type: gp3
-      volume_size: 30
+      volume_size: 65
       encrypted: true
       iops: null
       throughput: null
