@@ -12,7 +12,7 @@ resource "random_id" "random" {
 
 module "runners" {
   source                            = "philips-labs/github-runner/aws//modules/multi-runner"
-  version                           = "4.4.1"
+  version                           = "5.4.2"
   multi_runner_config               = local.multi_runner_config
   aws_region                        = local.aws_region
   vpc_id                            = module.vpc.vpc_id

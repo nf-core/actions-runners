@@ -1,4 +1,4 @@
-# taken from https://github.com/philips-labs/terraform-aws-github-runner/blob/main/examples/multi-runner/templates/runner-configs/linux-x64-ubuntu.yaml
+# gpu-linux-x64-ubuntu.yaml
 matcherConfig:
   exactMatch: true
   labelMatchers:
@@ -6,12 +6,13 @@ matcherConfig:
 fifo: true
 delay_webhook_event: 0
 redrive_build_queue:
-  enabled: false
-  maxReceiveCount: null
-runner_config: 
+  enabled: true
+  maxReceiveCount: 3
+
+runner_config:
   runner_os: linux
   runner_architecture: x64
-  runner_extra_labels: gpu
+  runner_extra_labels: ["gpu"]
   runner_run_as: ubuntu
   runner_name_prefix: ubuntu-2204-x64-gpu_
   enable_ssm_on_runners: true
@@ -23,31 +24,23 @@ runner_config:
   runners_maximum_count: 20
   enable_ephemeral_runners: true
   enable_organization_runners: true
-  scale_down_schedule_expression: cron(* * * * ? *)
+  scale_down_schedule_expression: "cron(* * * * ? *)"
   aws_region: eu-west-1
   userdata_template: ./templates/user-data-gpu.sh
-  ami_owners:
-  #   - "099720109477" # Canonical's Amazon account ID
+  minimum_running_time_in_minutes: 10
   ami_filter:
     name:
       - "Deep Learning Base OSS Nvidia Driver GPU AMI (Ubuntu 22.04)*"
     state:
       - available
-  # idle_config: # keep `idleCount` runners alive weekdays from 9am to 5pm
-    # - cron: "* * 9-17 * * 1-5"
-    #   timeZone: "Europe/Amsterdam"
-    #   idleCount: 3
-  minimum_running_time_in_minutes: 20
+    
   block_device_mappings:
     - device_name: /dev/sda1
       delete_on_termination: true
       volume_type: gp3
       volume_size: 75
       encrypted: true
-      iops: null
-      throughput: null
-      kms_key_id: null
-      snapshot_id: null
+      
   runner_log_files:
     - log_group_name: syslog
       prefix_log_group: true
