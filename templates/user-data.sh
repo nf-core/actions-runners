@@ -103,6 +103,11 @@ echo "docker.userEmulation = true" > nextflow.config
 # echo "docker.fixOwnership = true" >> nextflow.config
 echo "docker.runOptions = '--platform=linux/amd64'" >> nextflow.config
 
+# Create and set permissions for Nextflow work directories
+mkdir -p /home/ubuntu/tests
+chown -R ubuntu:ubuntu /home/ubuntu/tests
+chmod 2775 /home/ubuntu/tests  # Set SGID bit and give group write permissions
+
 mkdir -p /opt/actions-runner/_work/tools/tools
 
 ${post_install}
