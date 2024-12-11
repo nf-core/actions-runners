@@ -16,27 +16,7 @@ systemctl disable unattended-upgrades
 # Fix duplicate NVIDIA repos
 rm -f /etc/apt/sources.list.d/cuda-ubuntu2204-x86_64.list
 
-# Configure Docker
-mkdir -p /etc/docker
-cat > /etc/docker/daemon.json <<'EOF'
-{
-    "default-runtime": "nvidia",
-    "runtimes": {
-        "nvidia": {
-            "path": "nvidia-container-runtime",
-            "runtimeArgs": []
-        }
-    },
-    "log-driver": "json-file",
-    "log-opts": {
-        "max-size": "10m",
-        "max-file": "3"
-    }
-}
-EOF
 
-# Configure nvidia runtime
-nvidia-ctk runtime configure --runtime=docker
 systemctl restart docker
 
 # Install CloudWatch agent
@@ -68,9 +48,9 @@ mkdir -p /home/ubuntu/tests
 chown -R ubuntu:ubuntu /home/ubuntu/tests
 chmod 777 /home/ubuntu/tests  # Ensuring full read/write/execute permissions for nf-test
 
-# Verify GPU setup
+# Simple GPU verification - using AMI's default setup
 nvidia-smi
-docker run --rm --gpus all nvidia/cuda:12.0.1-base-ubuntu22.04 nvidia-smi || true
+docker run --rm --gpus all nvidia/cuda:12.0.1-base-ubuntu22.04 nvidia-smi
 
 ${post_install}
 
