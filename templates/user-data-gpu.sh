@@ -48,9 +48,26 @@ mkdir -p /home/ubuntu/tests
 chown -R ubuntu:ubuntu /home/ubuntu/tests
 chmod 777 /home/ubuntu/tests  # Ensuring full read/write/execute permissions for nf-test
 
-# Simple GPU verification - using AMI's default setup
-nvidia-smi
-docker run --rm --gpus all nvidia/cuda:12.0.1-base-ubuntu22.04 nvidia-smi
+# GPU verification with basic error handling
+echo "Starting GPU verification..."
+
+# Check nvidia-smi
+if ! nvidia-smi; then
+    echo "ERROR: nvidia-smi check failed"
+    # Log some basic diagnostics
+    nvidia-smi -q || true
+    journalctl -u nvidia-persistenced --no-pager | tail -n 20 || true
+fi
+
+# Check Docker GPU support
+if ! docker run --rm --gpus all nvidia/cuda:12.0.1-base-ubuntu22.04 nvidia-smi; then
+    echo "ERROR: Docker GPU check failed"
+    # Log Docker status
+    docker info || true
+fi
+
+# Continue with script regardless of GPU checks
+echo "GPU verification completed"
 
 ${post_install}
 
