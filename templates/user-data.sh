@@ -27,8 +27,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
     unzip \
     wget \
     openjdk-17-jdk \
-    python3.10 \
-    python3.10-venv
+    python3.11 \
+    python3.11-venv
 
 # alias python3 with python
 alias python=python3
