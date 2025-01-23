@@ -108,7 +108,15 @@ mkdir -p /home/ubuntu/tests
 chown -R ubuntu:ubuntu /home/ubuntu/tests
 chmod 2775 /home/ubuntu/tests  # Set SGID bit and give group write permissions
 
+# Create and set proper permissions for runner work directories
 mkdir -p /opt/actions-runner/_work/tools/tools
+mkdir -p /opt/actions-runner/_work/modules/modules
+chown -R ubuntu:ubuntu /opt/actions-runner/_work
+chmod -R 2775 /opt/actions-runner/_work  # Set SGID bit and give group write permissions
+
+# Configure git to trust the runner work directories
+su -l $user_name -c "git config --global --add safe.directory /opt/actions-runner/_work/tools/tools"
+su -l $user_name -c "git config --global --add safe.directory /opt/actions-runner/_work/modules/modules"
 
 ${post_install}
 
