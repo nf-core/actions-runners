@@ -108,7 +108,50 @@ mkdir -p /home/ubuntu/tests
 chown -R ubuntu:ubuntu /home/ubuntu/tests
 chmod 2775 /home/ubuntu/tests  # Set SGID bit and give group write permissions
 
+# Create and set proper permissions for runner work directories
 mkdir -p /opt/actions-runner/_work/tools/tools
+mkdir -p /opt/actions-runner/_work/modules/modules
+chown -R ubuntu:ubuntu /opt/actions-runner/_work
+chmod -R 2775 /opt/actions-runner/_work  # Set SGID bit and give group write permissions
+
+# Create cleanup script
+cat > /opt/actions-runner/cleanup.sh <<'EOF'
+#!/bin/bash
+
+# Function to safely clean directory if it exists
+clean_dir() {
+    if [ -d "$1" ]; then
+        echo "Cleaning directory: $1"
+        rm -rf "$1"/* 2>/dev/null || {
+            echo "Warning: Some files in $1 could not be removed"
+        }
+    else
+        echo "Directory does not exist: $1"
+    fi
+}
+
+# Clean each directory
+clean_dir "/opt/actions-runner/_work/modules/modules"
+clean_dir "/opt/actions-runner/_work/tools/tools"
+clean_dir "/home/ubuntu/tests"
+EOF
+
+chmod +x /opt/actions-runner/cleanup.sh
+chown ubuntu:ubuntu /opt/actions-runner/cleanup.sh
+
+# Add post-job hook to clean directories
+mkdir -p /opt/actions-runner/hooks
+cat > /opt/actions-runner/hooks/post-job.sh <<'EOF'
+#!/bin/bash
+/opt/actions-runner/cleanup.sh
+EOF
+
+chmod +x /opt/actions-runner/hooks/post-job.sh
+chown ubuntu:ubuntu /opt/actions-runner/hooks/post-job.sh
+
+# Configure git to trust the runner work directories
+su -l $user_name -c "git config --global --add safe.directory /opt/actions-runner/_work/tools/tools"
+su -l $user_name -c "git config --global --add safe.directory /opt/actions-runner/_work/modules/modules"
 
 ${post_install}
 
