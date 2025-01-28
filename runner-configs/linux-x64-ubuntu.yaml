@@ -17,9 +17,9 @@ runner_config:
   enable_ssm_on_runners: true
   credit_specification: standard
   instance_types:
-    - t3a.large
-    - m5ad.large
-    - m5a.large
+    - t3a.xlarge
+    - m5ad.xlarge
+    - m5a.xlarge
   runners_maximum_count: 200
   enable_ephemeral_runners: false
   enable_organization_runners: true
