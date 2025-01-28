@@ -28,7 +28,12 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
     wget \
     openjdk-17-jdk \
     python3.11 \
-    python3.11-venv
+    python3.11-venv \
+    singularity-container
+
+# Configure Singularity for unprivileged usage
+mkdir -p /home/ubuntu/.singularity/cache
+chown -R ubuntu:ubuntu /home/ubuntu/.singularity
 
 # alias python3 with python
 alias python=python3
